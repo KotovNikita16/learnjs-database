@@ -259,8 +259,7 @@ CREATE TABLE IF NOT EXISTS public.person
 (
     id bigint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1 ),
     person_name text COLLATE pg_catalog."default" NOT NULL,
-    CONSTRAINT person_pkey PRIMARY KEY (id),
-    CONSTRAINT person_name_unique UNIQUE (person_name)
+    CONSTRAINT person_pkey PRIMARY KEY (id)
 )
 
 TABLESPACE pg_default;
