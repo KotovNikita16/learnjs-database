@@ -50,6 +50,12 @@
 
 *поля film_id и country_id образуют pk таблицы **film_country_rental***
 
+**Таблица со странами, которые принимали участие в создании того или иного фильма (film_country_creation)**
+* film_id - фильм: fkey со ссылкой на поле id таблицы **film**, bigint
+* country_id - страна: fkey со ссылкой на поле id таблицы **country**, bigint
+
+*поля film_id и country_id образуют pk таблицы **film_country_creation***
+
 **Таблица с актёрами дубляжа фильмов, или "Роли дублировали" (film_dubbing)**
 * film_id - фильм, который дублировался: fkey со ссылкой на поле id таблицы **film**, bigint
 * person_id - актёр дубляжа: fkey со ссылкой на поле id таблицы **person**, bigint
