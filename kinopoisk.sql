@@ -154,6 +154,7 @@ CREATE TABLE IF NOT EXISTS public.film_country_rental
     premiere_date text COLLATE pg_catalog."default",
     CONSTRAINT film_country_rental_pkey PRIMARY KEY (film_id, country_id),
     CONSTRAINT country_id FOREIGN KEY (country_id)
+    CONSTRAINT country_name_unique UNIQUE (country_name)
         REFERENCES public.country (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
