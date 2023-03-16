@@ -22,3 +22,15 @@
 * mpaa_rating - рейтинг MPAA, text
 * duration_min - продолжительность фильма в минутах, numeric
 * film_description - описание фильма, text
+
+**Таблица  стран (country)**
+* id - pk, bigint с автоинкрементом
+* country_name - название страны, text
+
+**Таблица  жанров (genre)**
+* id - pk, bigint с автоинкрементом
+* genre_name - название жанра, text
+
+**Таблица людей, принимающих участие в создании и проката фильмов (person)**
+* id - pk, bigint с автоинкрементом
+* person_name - имя человека, text
