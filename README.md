@@ -61,3 +61,9 @@
 * genre_id - жанр фильма: fkey со ссылкой на поле id таблицы **genre**, bigint
 
 *поля film_id и genre_id образуют pk таблицы **film_genre***
+
+* **Поля pk имеют свойство NOT NULL.**
+* **Это же касается и внешних ключей, за исключением таблицы film.**
+* **Все fkey имеют свойства ON UPDATE CASCADE и ON DELETE CASCADE (в таблице film ON DELETE SET NULL).**
+* **Также свойство NOT NULL имеют неключевые поля: title, prod_year, country_name, genre_name, person_name.**
+* **Свойство UNIQUE имеют поля genre_name и country_name**
