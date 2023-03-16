@@ -73,3 +73,6 @@
 * **Все fkey имеют свойства ON UPDATE CASCADE и ON DELETE CASCADE (в таблице film ON DELETE SET NULL).**
 * **Также свойство NOT NULL имеют неключевые поля: title, prod_year, country_name, genre_name, person_name.**
 * **Свойство UNIQUE имеют поля genre_name и country_name**
+
+ER-диаграмма модели БД:
+![ER](/ER.png)
