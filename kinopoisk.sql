@@ -42,6 +42,45 @@ ALTER TABLE IF EXISTS public.country
 COMMENT ON TABLE public.country
     IS 'страны, в которых были прокаты фильмов';
 	
+-- Table: public.genre
+
+-- DROP TABLE IF EXISTS public.genre;
+
+CREATE TABLE IF NOT EXISTS public.genre
+(
+    id bigint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1 ),
+    genre_name text COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT genre_pkey PRIMARY KEY (id),
+    CONSTRAINT genre_name_unique UNIQUE (genre_name)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.genre
+    OWNER to postgres;
+
+COMMENT ON TABLE public.genre
+    IS 'жанры фильмов';
+
+-- Table: public.person
+
+-- DROP TABLE IF EXISTS public.person;
+
+CREATE TABLE IF NOT EXISTS public.person
+(
+    id bigint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1 ),
+    person_name text COLLATE pg_catalog."default" NOT NULL,
+    CONSTRAINT person_pkey PRIMARY KEY (id)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.person
+    OWNER to postgres;
+
+COMMENT ON TABLE public.person
+    IS 'люди, принимающие участие в создании фильмов';
+
 -- Table: public.film
 
 -- DROP TABLE IF EXISTS public.film;
@@ -232,41 +271,32 @@ ALTER TABLE IF EXISTS public.film_genre
 COMMENT ON TABLE public.film_genre
     IS 'связь фильма и его жанров';
 	
--- Table: public.genre
+-- Table: public.film_country_creation
 
--- DROP TABLE IF EXISTS public.genre;
+-- DROP TABLE IF EXISTS public.film_country_creation;
 
-CREATE TABLE IF NOT EXISTS public.genre
+CREATE TABLE IF NOT EXISTS public.film_country_creation
 (
-    id bigint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1 ),
-    genre_name text COLLATE pg_catalog."default" NOT NULL,
-    CONSTRAINT genre_pkey PRIMARY KEY (id),
-    CONSTRAINT genre_name_unique UNIQUE (genre_name)
+    film_id bigint NOT NULL,
+    country_id bigint NOT NULL,
+    CONSTRAINT film_country_creation_pkey PRIMARY KEY (film_id, country_id),
+    CONSTRAINT country_fkey FOREIGN KEY (country_id)
+        REFERENCES public.country (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+        NOT VALID,
+    CONSTRAINT film_fkey FOREIGN KEY (film_id)
+        REFERENCES public.film (id) MATCH SIMPLE
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+        NOT VALID
 )
 
 TABLESPACE pg_default;
 
-ALTER TABLE IF EXISTS public.genre
+ALTER TABLE IF EXISTS public.film_country_creation
     OWNER to postgres;
 
-COMMENT ON TABLE public.genre
-    IS 'жанры фильмов';
-	
--- Table: public.person
-
--- DROP TABLE IF EXISTS public.person;
-
-CREATE TABLE IF NOT EXISTS public.person
-(
-    id bigint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1 ),
-    person_name text COLLATE pg_catalog."default" NOT NULL,
-    CONSTRAINT person_pkey PRIMARY KEY (id)
-)
-
-TABLESPACE pg_default;
-
-ALTER TABLE IF EXISTS public.person
-    OWNER to postgres;
-
-COMMENT ON TABLE public.person
-    IS 'люди, принимающие участие в создании фильмов';
+COMMENT ON TABLE public.film_country_creation
+    IS 'страна(-ы), в которой(-ых) был создан фильм';
+    
