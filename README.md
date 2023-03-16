@@ -15,7 +15,7 @@
 * artist - художник: fkey со ссылкой на поле id таблицы **person**, bigint
 * editor - монтажер: fkey со ссылкой на поле id таблицы **person**, bigint
 * budget - бюджет (USD): numeric
-* marketing - маркетинг: numeric
+* marketing - маркетинг (USD): numeric
 * dvd_release - дата релиза dvd издания и издатель: text
 * bluray_release - дата релиза blue-ray издания и издатель: text
 * age_limit - возраст: text
