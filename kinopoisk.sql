@@ -30,7 +30,8 @@ CREATE TABLE IF NOT EXISTS public.country
 (
     id bigint NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 9223372036854775807 CACHE 1 ),
     country_name text COLLATE pg_catalog."default" NOT NULL,
-    CONSTRAINT country_pkey PRIMARY KEY (id)
+    CONSTRAINT country_pkey PRIMARY KEY (id),
+    CONSTRAINT country_name_unique UNIQUE (country_name)
 )
 
 TABLESPACE pg_default;
@@ -70,37 +71,37 @@ CREATE TABLE IF NOT EXISTS public.film
     CONSTRAINT artist_fkey FOREIGN KEY (artist)
         REFERENCES public.person (id) MATCH SIMPLE
         ON UPDATE CASCADE
-        ON DELETE CASCADE
+        ON DELETE SET NULL
         NOT VALID,
     CONSTRAINT cam_operator_fkey FOREIGN KEY (cam_operator)
         REFERENCES public.person (id) MATCH SIMPLE
         ON UPDATE CASCADE
-        ON DELETE CASCADE
+        ON DELETE SET NULL
         NOT VALID,
     CONSTRAINT composer_fkey FOREIGN KEY (composer)
         REFERENCES public.person (id) MATCH SIMPLE
         ON UPDATE CASCADE
-        ON DELETE CASCADE
+        ON DELETE SET NULL
         NOT VALID,
     CONSTRAINT director_fkey FOREIGN KEY (director)
         REFERENCES public.person (id) MATCH SIMPLE
         ON UPDATE CASCADE
-        ON DELETE CASCADE
+        ON DELETE SET NULL
         NOT VALID,
     CONSTRAINT editor_fkey FOREIGN KEY (editor)
         REFERENCES public.person (id) MATCH SIMPLE
         ON UPDATE CASCADE
-        ON DELETE CASCADE
+        ON DELETE SET NULL
         NOT VALID,
     CONSTRAINT producer_fkey FOREIGN KEY (producer)
         REFERENCES public.person (id) MATCH SIMPLE
         ON UPDATE CASCADE
-        ON DELETE CASCADE
+        ON DELETE SET NULL
         NOT VALID,
     CONSTRAINT scenario_fkey FOREIGN KEY (scenario)
         REFERENCES public.person (id) MATCH SIMPLE
         ON UPDATE CASCADE
-        ON DELETE CASCADE
+        ON DELETE SET NULL
         NOT VALID
 )
 
@@ -154,7 +155,6 @@ CREATE TABLE IF NOT EXISTS public.film_country_rental
     premiere_date text COLLATE pg_catalog."default",
     CONSTRAINT film_country_rental_pkey PRIMARY KEY (film_id, country_id),
     CONSTRAINT country_id FOREIGN KEY (country_id)
-    CONSTRAINT country_name_unique UNIQUE (country_name)
         REFERENCES public.country (id) MATCH SIMPLE
         ON UPDATE CASCADE
         ON DELETE CASCADE
